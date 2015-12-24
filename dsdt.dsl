@@ -4127,6 +4127,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                 PDBM &= 0xFFFFFFFFFFFFFFFD
                 MEMB = Local2
                 PDBM = Local1
+
+                Return (Zero)
             }
 
             Method (_PS3, 0, Serialized)  // _PS3: Power State 3
@@ -4200,6 +4202,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                 PDBM &= 0xFFFFFFFFFFFFFFFD
                 MEMB = Local2
                 PDBM = Local1
+
+                Return (Zero)
             }
 
             Method (_DSW, 3, NotSerialized)  // _DSW: Device Sleep Wake
