@@ -3720,18 +3720,18 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
             Name (_CID, "VIB8601")  // _CID: Compatible ID
             Name (_DDN, "Intel(R) Vibra Driver - VIB8601")  // _DDN: DOS Device Name
             Name (_UID, One)  // _UID: Unique ID
+            Name (RBUF, ResourceTemplate ()
+            {
+                GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionOutputOnly,
+                    "\\_SB.I2C7.PMIC", 0x00, ResourceConsumer, ,
+                    )
+                    {   // Pin list
+                        0x0004
+                    }
+            })
             Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
             {
-                Name (RBUF, ResourceTemplate ()
-                {
-                    GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionOutputOnly,
-                        "\\_SB.I2C7.PMIC", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
-                            0x0004
-                        }
-                })
-                Return (RBUF) /* \_SB_.VIBR._CRS.RBUF */
+                Return (RBUF) /* \_SB_.VIBR.RBUF */
             }
 
             Method (_STA, 0, NotSerialized)  // _STA: Status
@@ -8397,7 +8397,6 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                     Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     If ((Arg0 == ToUUID ("a9240c44-f032-454d-80e5-7aeed80e9551")))
                     {
-                        CreateByteField (Arg3, Zero, FARG)
                         While (One)
                         {
                             T_0 = Arg2
@@ -11334,41 +11333,8 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
             })
             Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
             {
-                Name (RBUF, ResourceTemplate ()
-                {
-                    GpioInt (Edge, ActiveBoth, ExclusiveAndWake, PullDefault, 0x0000,
-                        "\\_SB.GPO2", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
-                            0x0010
-                        }
-                    GpioInt (Edge, ActiveBoth, ExclusiveAndWake, PullDefault, 0x0000,
-                        "\\_SB.GPO0", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
-                            0x0006
-                        }
-                    GpioInt (Edge, ActiveBoth, Exclusive, PullDefault, 0x0000,
-                        "\\_SB.I2C7.PMIC", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
-                            0x0000
-                        }
-                    GpioInt (Edge, ActiveBoth, Exclusive, PullDefault, 0x0000,
-                        "\\_SB.I2C7.PMIC", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
-                            0x0001
-                        }
-                    GpioInt (Edge, ActiveBoth, Exclusive, PullDefault, 0x0000,
-                        "\\_SB.I2C7.PMIC", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
-                            0x0007
-                        }
-                })
-                Name (PBUF, ResourceTemplate ()
-                {
+               Name (PBUF, ResourceTemplate ()
+               {
                     GpioInt (Edge, ActiveBoth, ExclusiveAndWake, PullDefault, 0x0000,
                         "\\_SB.GPO2", 0x00, ResourceConsumer, ,
                         )
