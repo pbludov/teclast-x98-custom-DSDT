@@ -11803,7 +11803,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                 TES2 = ^^^I2C3.FCTL /* \_SB_.I2C3.FCTL */
                 E002 = (E002 & 0xFE)
                 ^^^I2C3.FCTL = TES2 /* \_SB_.I2C1.BATC.TES2 */
-                DECC = FG3C /* \_SB_.I2C1.FG3C */
+                BU3C = FG3C /* \_SB_.I2C1.FG3C */
                 Index (BIXP, 0x02) = DECC /* \_SB_.I2C1.BATC.DECC */
                 FUEC = FG0E /* \_SB_.I2C1.FG0E */
                 Index (BIXP, 0x03) = FUEC /* \_SB_.I2C1.BATC.FUEC */
