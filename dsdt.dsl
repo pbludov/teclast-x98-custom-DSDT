@@ -11770,26 +11770,26 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
             CreateByteField (BUF3, 0x02, B003)
             Name (BIXP, Package (0x14)
             {
-                Zero,
-                Zero,
-                0x053C,
-                0x053C,
-                One,
-                0xFFFFFFFF,
-                0x86,
-                0x35,
-                0x0100,
-                0x40,
-                0x0320,
-                0x251C,
-                Zero,
-                Zero,
-                0x64,
-                0x64,
-                "Battery ",
-                "Battery ",
-                "Battery ",
-                "Battery "
+                Zero,       // Revision (ACPI 5.0)
+                Zero,       // Power Unit (mW)
+                1340,       // Design Capacity
+                1340,       // Last Full Charge Capacity
+                One,        // Battery Technology (rechargeable)
+                0xFFFFFFFF, // Design Voltage, mV (unknown)
+                134,        // Design capacity of Warning
+                53,         // Design Capacity of Low
+                256,        // Cycle Count
+                64,         // Measurement Accuracy (0.064%)
+                800,        // Max Sampling Time, msec
+                9500,       // Min Sampling Time, msec
+                Zero,       // Max Averaging Interval
+                Zero,       // Min Averaging Interval
+                100,        // Battery Capacity Granularity 1
+                100,        // Battery Capacity Granularity 2
+                "Battery ", // Model Number
+                "Battery ", // Serial Number
+                "Battery ", // Battery Type
+                "Battery "  // OEM Information
             })
             Name (BSTP, Package (0x04)
             {
@@ -11807,16 +11807,16 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                 Index (BIXP, 0x02) = DECC /* \_SB_.I2C1.BATC.DECC */
                 FUEC = FG0E /* \_SB_.I2C1.FG0E */
                 Index (BIXP, 0x03) = FUEC /* \_SB_.I2C1.BATC.FUEC */
-                Divide (FUEC, 0x0A, Local1, Local0)
+                Divide (FUEC, 10, Local1, Local0)
                 Index (BIXP, 0x06) = Local1
-                Divide (FUEC, 0x19, Local1, Local0)
+                Divide (FUEC, 25, Local1, Local0)
                 Index (BIXP, 0x07) = Local1
                 Return (BIXP) /* \_SB_.I2C1.BATC.BIXP */
             }
 
             Method (_BST, 0, Serialized)  // _BST: Battery Status
             {
-                Sleep (0x64)
+                Sleep (100)
                 TES2 = BQ08 /* \_SB_.I2C1.BQ08 */
                 BUF4 = FG04 /* \_SB_.I2C1.FG04 */
                 BUFC = FG0C /* \_SB_.I2C1.FG0C */
@@ -11829,7 +11829,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 
                 If (((E002 & 0x30) != Zero))
                 {
-                    Index (BSTP, Zero) = 0x02
+                    Index (BSTP, Zero) = 0x02 // Critical
                     S008 = 0x2003CD00
                     BUF3 = BQ04 /* \_SB_.I2C1.BQ04 */
                     B003 = ((B003 & 0x03) | 0xD8)
@@ -11842,12 +11842,12 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                     BQ02 = BUF3 /* \_SB_.I2C1.BATC.BUF3 */
                     If (((E002 & 0x30) == 0x30))
                     {
-                        Index (BSTP, Zero) = Zero
+                        Index (BSTP, Zero) = Zero // Discharging
                     }
                 }
                 Else
                 {
-                    Index (BSTP, Zero) = One
+                    Index (BSTP, Zero) = One // Charging
                 }
 
                 Index (BSTP, One) = PERC /* \_SB_.I2C1.BATC.PERC */
@@ -11858,17 +11858,9 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
             {
-                If ((Arg0 == ToUUID ("4c2067e3-887d-475c-9720-4af1d3ed602e") /* Battery Thermal Limit */))
-                {
-                    If ((Arg2 == 0x02))
-                    {
-                        If ((Arg1 == Zero))
-                        {
-                            Return (Buffer (One)
-                            {
-                                 0x00
-                            })
-                        }
+                If ((Arg0 == ToUUID ("4c2067e3-887d-475c-9720-4af1d3ed602e") /* Battery Thermal Limit */)) {
+                    If (Arg1 == 0 && Arg2 == 2) {
+                        Return (Buffer (One) { 0x00 }) // The battery is not user-serviceable
                     }
                 }
 
@@ -11892,36 +11884,32 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 
             Method (PMAX, 0, NotSerialized)
             {
-                Return (0x2EE0)
+                Return (12000)
             }
 
             Method (VMIN, 0, NotSerialized)
             {
-                Return (0x0DAC)
+                Return (3500)
             }
 
             Method (APWR, 0, NotSerialized)
             {
-                Return (0xDEA8)
+                Return (57000)
             }
 
             Method (NPWR, 0, NotSerialized)
             {
-                Local0 = APWR ()
+                Local0 = APWR
                 Return (Local0)
             }
 
             Method (PSRC, 0, NotSerialized)
             {
                 TES2 = BQ08 /* \_SB_.I2C1.BQ08 */
-                If (((E002 & 0x30) != Zero))
-                {
+                If (((E002 & 0x30) != Zero)) {
                     Return (One)
                 }
-                Else
-                {
-                    Return (0x02)
-                }
+                Return (0x02)
             }
 
             Method (CTYP, 0, NotSerialized)
@@ -11931,7 +11919,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 
             Method (ARTG, 0, NotSerialized)
             {
-                Return (0xDEA8)
+                Return (57000)
             }
         }
     }
@@ -11943,15 +11931,10 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
             Name (_HID, "ACPI0003" /* Power Source Device */)  // _HID: Hardware ID
             Method (_PSR, 0, NotSerialized)  // _PSR: Power Source
             {
-                Local0 = ^^I2C1.BATC.PSRC ()
-                If ((Local0 == One))
-                {
-                    Return (One)
+                If (^^I2C1.BATC.PSRC() == One) {
+                    Return (One) // On AC power
                 }
-                Else
-                {
-                    Return (Zero)
-                }
+                Return (Zero) // Offline
             }
 
             Method (_PCL, 0, NotSerialized)  // _PCL: Power Consumer List
