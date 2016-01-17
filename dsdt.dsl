@@ -10901,13 +10901,13 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                         "\\_SB.GPO0", 0x00, ResourceConsumer, ,
                         )
                         {   // Pin list
-                            0x0005
+                            0x0004
                         }
                     GpioInt (Edge, ActiveBoth, Exclusive, PullDefault, 0x0000,
                         "\\_SB.GPO0", 0x00, ResourceConsumer, ,
                         )
                         {   // Pin list
-                            0x0004
+                            0x0005
                         }
                     GpioInt (Edge, ActiveBoth, Exclusive, PullDefault, 0x0000,
                         "\\_SB.GPO0", 0x00, ResourceConsumer, ,
