@@ -5142,56 +5142,26 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                            If ((Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")))
-                            {
-                                While (One)
-                                {
-                                    T_0 = ToInteger (Arg2)
-                                    If ((T_0 == Zero))
-                                    {
-                                        If ((Arg1 == One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If ((T_0 == One))
-                                        {
-                                            If ((SDGV == 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If ((T_0 == 0x02))
-                                            {
-                                                Return (SDGV) /* \SDGV */
-                                            }
-                                        }
-                                    }
-
-                                    Break
+                          If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")) {
+                              Switch (ToInteger (Arg2)) {
+                                Case (Zero) {
+                                  If (Arg1 == One) {
+                                      Return (Buffer (One) { 0x07 })
+                                  }
+                                  Return (Buffer (One) { 0x00 })
                                 }
-                            }
+                                Case (One) {
+                                  If ((SDGV != 0xFF)) {
+                                      Return (One)
+                                  }
+                                }
+                                Case (0x02) {
+                                  Return (SDGV) /* \SDGV */
+                                }
+                              }
+                          }
 
-                            Return (Zero)
+                          Return (Zero)
                         }
                     }
 
@@ -5239,56 +5209,26 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                            If ((Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")))
-                            {
-                                While (One)
-                                {
-                                    T_0 = ToInteger (Arg2)
-                                    If ((T_0 == Zero))
-                                    {
-                                        If ((Arg1 == One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If ((T_0 == One))
-                                        {
-                                            If ((SDGV == 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If ((T_0 == 0x02))
-                                            {
-                                                Return (SDGV) /* \SDGV */
-                                            }
-                                        }
-                                    }
-
-                                    Break
+                          If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")) {
+                              Switch (ToInteger (Arg2)) {
+                                Case (Zero) {
+                                  If (Arg1 == One) {
+                                      Return (Buffer (One) { 0x07 })
+                                  }
+                                  Return (Buffer (One) { 0x00 })
                                 }
-                            }
+                                Case (One) {
+                                  If ((SDGV != 0xFF)) {
+                                      Return (One)
+                                  }
+                                }
+                                Case (0x02) {
+                                  Return (SDGV) /* \SDGV */
+                                }
+                              }
+                          }
 
-                            Return (Zero)
+                          Return (Zero)
                         }
                     }
 
@@ -5336,56 +5276,26 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                            If ((Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")))
-                            {
-                                While (One)
-                                {
-                                    T_0 = ToInteger (Arg2)
-                                    If ((T_0 == Zero))
-                                    {
-                                        If ((Arg1 == One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If ((T_0 == One))
-                                        {
-                                            If ((SDGV == 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If ((T_0 == 0x02))
-                                            {
-                                                Return (SDGV) /* \SDGV */
-                                            }
-                                        }
-                                    }
-
-                                    Break
+                          If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")) {
+                              Switch (ToInteger (Arg2)) {
+                                Case (Zero) {
+                                  If (Arg1 == One) {
+                                      Return (Buffer (One) { 0x07 })
+                                  }
+                                  Return (Buffer (One) { 0x00 })
                                 }
-                            }
+                                Case (One) {
+                                  If ((SDGV != 0xFF)) {
+                                      Return (One)
+                                  }
+                                }
+                                Case (0x02) {
+                                  Return (SDGV) /* \SDGV */
+                                }
+                              }
+                          }
 
-                            Return (Zero)
+                          Return (Zero)
                         }
                     }
 
@@ -5433,56 +5343,26 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                         })
                         Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                         {
-                            Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                            If ((Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")))
-                            {
-                                While (One)
-                                {
-                                    T_0 = ToInteger (Arg2)
-                                    If ((T_0 == Zero))
-                                    {
-                                        If ((Arg1 == One))
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x07
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (Buffer (One)
-                                            {
-                                                 0x00
-                                            })
-                                        }
-                                    }
-                                    Else
-                                    {
-                                        If ((T_0 == One))
-                                        {
-                                            If ((SDGV == 0xFF))
-                                            {
-                                                Return (Zero)
-                                            }
-                                            Else
-                                            {
-                                                Return (One)
-                                            }
-                                        }
-                                        Else
-                                        {
-                                            If ((T_0 == 0x02))
-                                            {
-                                                Return (SDGV) /* \SDGV */
-                                            }
-                                        }
-                                    }
-
-                                    Break
+                          If (Arg0 == ToUUID ("a5fc708f-8775-4ba6-bd0c-ba90a1ec72f8")) {
+                              Switch (ToInteger (Arg2)) {
+                                Case (Zero) {
+                                  If (Arg1 == One) {
+                                      Return (Buffer (One) { 0x07 })
+                                  }
+                                  Return (Buffer (One) { 0x00 })
                                 }
-                            }
+                                Case (One) {
+                                  If ((SDGV != 0xFF)) {
+                                      Return (One)
+                                  }
+                                }
+                                Case (0x02) {
+                                  Return (SDGV) /* \SDGV */
+                                }
+                              }
+                          }
 
-                            Return (Zero)
+                          Return (Zero)
                         }
                     }
 
@@ -8397,45 +8277,19 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
-                    Name (T_1, Zero)  // _T_x: Emitted by ASL Compiler
-                    Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                    If ((Arg0 == ToUUID ("a9240c44-f032-454d-80e5-7aeed80e9551")))
-                    {
-                        While (One)
-                        {
-                            T_0 = Arg2
-                            If ((T_0 == 0x03))
-                            {
-                                While (One)
-                                {
-                                    T_1 = Arg3
-                                    If ((T_1 == Zero))
-                                    {
-                                        Return (0x11)
-                                    }
-                                    Else
-                                    {
-                                        If ((T_1 == 0x04))
-                                        {
-                                            Return (Buffer (0x1C)
-                                            {
-                                                /* 0000 */  0x03, 0x00, 0x00, 0xCE, 0x40, 0x00, 0x01, 0x00,  /* ....@... */
-                                                /* 0008 */  0x01, 0x00, 0x00, 0x00, 0x1D, 0x00, 0x01, 0x00,  /* ........ */
-                                                /* 0010 */  0x00, 0x10, 0x0D, 0x00, 0x1D, 0x00, 0x01, 0x00,  /* ........ */
-                                                /* 0018 */  0x00, 0x01, 0x0E, 0x00                           /* .... */
-                                            })
-                                        }
-                                        Else
-                                        {
-                                            Return (0x80000002)
-                                        }
-                                    }
-
-                                    Break
-                                }
+                    If ((Arg0 == ToUUID ("a9240c44-f032-454d-80e5-7aeed80e9551"))) {
+                        If (Arg2 == 0x03) {
+                            If (Arg3 == Zero) {
+                                Return (0x11)
                             }
-
-                            Break
+                            If (Arg3 == 0x04) {
+                                Return (Buffer (0x1C) {
+                                    /* 0000 */  0x03, 0x00, 0x00, 0xCE, 0x40, 0x00, 0x01, 0x00,  /* ....@... */
+                                    /* 0008 */  0x01, 0x00, 0x00, 0x00, 0x1D, 0x00, 0x01, 0x00,  /* ........ */
+                                    /* 0010 */  0x00, 0x10, 0x0D, 0x00, 0x1D, 0x00, 0x01, 0x00,  /* ........ */
+                                    /* 0018 */  0x00, 0x01, 0x0E, 0x00                           /* .... */
+                                })
+                            }
                         }
                     }
 
@@ -10050,7 +9904,7 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
                 {
                     Name (RBUF, ResourceTemplate ()
                     {
-                        I2cSerialBus (0x0038, ControllerInitiated, 0x00061A80,
+                        I2cSerialBus (0x0038, ControllerInitiated, 400000,
                             AddressingMode7Bit, "\\_SB.I2C6",
                             0x00, ResourceConsumer, ,
                             )
@@ -10070,70 +9924,33 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 
                 Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
                 {
-                    Name (T_1, Zero)  // _T_x: Emitted by ASL Compiler
-                    Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
                     Debug = "Method _DSM begin"
-                    If ((Arg0 == ToUUID ("3cdff6f7-4267-4555-ad05-b30a3d8938de") /* HID I2C Device */))
-                    {
-                        While (One)
-                        {
-                            T_0 = ToInteger (Arg2)
-                            If ((T_0 == Zero))
-                            {
-                                While (One)
-                                {
-                                    T_1 = ToInteger (Arg1)
-                                    If ((T_1 == One))
-                                    {
-                                        Debug = "Method _DSM Function Query"
-                                        Return (Buffer (One)
-                                        {
-                                             0x03
-                                        })
-                                    }
-                                    Else
-                                    {
-                                        Return (Buffer (One)
-                                        {
-                                             0x00
-                                        })
-                                    }
-
-                                    Break
+                    If ((Arg0 == ToUUID ("3cdff6f7-4267-4555-ad05-b30a3d8938de") /* HID I2C Device */)) {
+                        Switch (ToInteger (Arg2)) {
+                            Case (Zero) {
+                                If (ToInteger (Arg1) == One) {
+                                    Debug = "Method _DSM Function Query"
+                                    Return (Buffer (One) { 0x03 })
                                 }
+                                Break
                             }
-                            Else
-                            {
-                                If ((T_0 == One))
-                                {
-                                    Debug = "Method _DSM Function HID"
-                                    Return (Zero)
-                                }
-                                Else
-                                {
-                                    Return (Zero)
-                                }
+                            Case (One) {
+                                Debug = "Method _DSM Function HID"
+                                Return (Zero)
                             }
-
-                            Break
+                            Default {
+                                Return (Zero)
+                            }
                         }
                     }
-                    Else
-                    {
-                        Return (Buffer (One)
-                        {
-                             0x00
-                        })
-                    }
+                    Return (Buffer (One) { 0x00 })
                 }
 
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
-                    If ((TPID == One))
-                    {
+                    If (TPID == One) {
                         Return (0x0F)
                     }
-
                     Return (Zero)
                 }
             }
@@ -11135,48 +10952,27 @@ DefinitionBlock ("DSDT.aml", "DSDT", 2, "ALASKA", "A M I ", 0x00000003)
 
             Method (_DSM, 4, Serialized)  // _DSM: Device-Specific Method
             {
-                Name (T_0, Zero)  // _T_x: Emitted by ASL Compiler
-                If ((OSYS == 0x07DD))
-                {
+                If ((OSYS == 0x07DD)) {
                     ^^I2C7.PMIC.FCOT = One
                 }
-                Else
-                {
+                Else {
                     ^^I2C7.PMIC.FCOT = Zero
                 }
 
-                If ((Arg0 == ToUUID ("dfbcf3c5-e7a5-44e6-9c1f-29c76f6e059c") /* Power Button Device */))
-                {
-                    While (One)
-                    {
-                        T_0 = ToInteger (Arg2)
-                        If ((T_0 == Zero))
-                        {
-                            Return (Buffer (One)
-                            {
-                                 0x03
-                            })
+                If (Arg0 == ToUUID ("dfbcf3c5-e7a5-44e6-9c1f-29c76f6e059c") /* Power Button Device */) {
+                    Switch (ToInteger (Arg2)) {
+                        Case (Zero) {
+                            Return (Buffer (One) { 0x03 })
                         }
-                        Else
-                        {
-                            If ((T_0 == One))
-                            {
-                                Return (0x07)
-                            }
+                        Case (One) {
+                            Return (0x07)
                         }
-
-                        Break
+                        Default {
+                            Return (Zero)
+                        }
                     }
                 }
-                Else
-                {
-                    Return (Buffer (One)
-                    {
-                         0x00
-                    })
-                }
-
-                Return (Zero)
+                Return (Buffer (One) { 0x00 })
             }
         }
 
